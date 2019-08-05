@@ -20,3 +20,7 @@ h2 {
   background: #f0f4f7;
   height: 100vh;
 }
+
+textarea {
+  height: 200px;
+}
