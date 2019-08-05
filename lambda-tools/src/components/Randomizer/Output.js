@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 function Output(props) {
   return (
     <div className="output">
-      {props.names}
+      <textarea rows="4" cols="35" value={props.names} />
     </div>
   );
 }

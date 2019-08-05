@@ -14,28 +14,32 @@ class Randomizer extends React.Component {
 }
 
 function Form() {
-  const { value, bind /*, {reset} */ } = useInput('');
+  const { value:name, bind:bindName } = useInput('');
+  const { value:time, bind:bindTime } = useInput('');
   const randomizeNames = (names) => {
     let randomizedNamesAndTimeSlots;
     
     let namesArray = names.split(`\n`);
     let randomNamesArray = namesArray.sort(() => Math.random() - 0.5).filter(name => name !== "");
     
-    return randomizedNamesAndTimeSlots = addTimeslotsToRandomizedList(1805, randomNamesArray).join(`\n`);
+    return randomizedNamesAndTimeSlots = addTimeslotsToRandomizedList(1920 /* make this "time" */, randomNamesArray).join(`\n`);
   }
   
-  const addTimeslotsToRandomizedList = (startTime, randomizedNamesArray) => {
+  const addTimeslotsToRandomizedList = (startTimeString, randomizedNamesArray) => {
     let splitValueArrayLength = randomizedNamesArray.length;
     let randomizedTimedNamesArray = [];
-
-    for (let i = 0; i < splitValueArrayLength; i++) {
-      randomizedTimedNamesArray.push(startTime);
-      randomizedTimedNamesArray.push(randomizedNamesArray[i]);
-
-      if (startTime % 100 > 39) {
-        startTime += 60;
-      } else {
-        startTime += 20;
+    let startTimeInteger = Number(startTimeString);
+    
+    if (startTimeInteger > 100) {
+      for (let i = 0; i < splitValueArrayLength; i++) {
+        randomizedTimedNamesArray.push([startTimeInteger, " - ", randomizedNamesArray[i]]);
+        randomizedTimedNamesArray[i] = randomizedTimedNamesArray[i].join("");
+        console.log();
+        if (startTimeInteger % 100 > 39) {
+          startTimeInteger += 60;
+        } else {
+          startTimeInteger += 20;
+        }
       }
     }
     return randomizedTimedNamesArray;
@@ -44,11 +48,15 @@ function Form() {
 
   return (
     <div className="form">
-      <label>
-        Name:
-        <textarea {...bind} />
-      </label>
-      <Output names={randomizeNames(value)}/>
+        <label>
+          Names 
+          <textarea {...bindName} />
+        </label>
+        <label>
+          Time
+          <input type="text" {...bindTime} />
+        </label>
+      <Output names={randomizeNames(name)}/>
     </div>
   )
 }
