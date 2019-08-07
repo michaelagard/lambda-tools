@@ -1,40 +1,46 @@
-import React from 'react';
-import Output from './Output';
-import { useInput } from './hooks/input-hook';
+import React, {useState} from 'react';
+const minimum = 0;
+function Randomizer() {
+  const [nameArray, setNameArray] = useState("Michael\nJess\nAlan\nPatrick\nKyle\nMax\nJeremy")
+  const [time, setTime] = useState("");
+  const [shuffledNameArray, setShuffledNameArray] = useState("")
 
-class Randomizer extends React.Component {
-  render() {
-    return (
-        <div>
-          <h1>Randomizer</h1>
-          <Form />
-        </div>
-    );
+  const handleNameChange = (event) => {
+    setNameArray(event.target.value)
   }
-}
 
-function Form() {
-  const { value:name, bind:bindName } = useInput('');
-  const { value:time, bind:bindTime } = useInput('');
-  const randomizeNames = (names) => {
-    let randomizedNamesAndTimeSlots;
-    
-    let namesArray = names.split(`\n`);
-    let randomNamesArray = namesArray.sort(() => Math.random() - 0.5).filter(name => name !== "");
-    
-    return randomizedNamesAndTimeSlots = addTimeslotsToRandomizedList(1920 /* make this "time" */, randomNamesArray).join(`\n`);
+  const handleTimeChange = (event) => {
+    setTime(validateInteger(event.target.value));
   }
-  
+
+  function validateInteger(count) {
+    return parseInt(count) | minimum;
+  }
+
+  const handleSaveData = event => {
+    event.preventDefault();
+    let submitData = nameArray.split("\n");
+    submitData = submitData.filter(function(name) { return name.trim() !== ''; });
+    localStorage.setItem("nameArray", JSON.stringify(submitData));
+  }
+
+  const handleLoadData = event => {
+    event.preventDefault();
+    setNameArray(JSON.parse(localStorage.getItem("nameArray")).join("\n"));
+  }
+
   const addTimeslotsToRandomizedList = (startTimeString, randomizedNamesArray) => {
-    let splitValueArrayLength = randomizedNamesArray.length;
     let randomizedTimedNamesArray = [];
+
+    let splitValueArrayLength = randomizedNamesArray.length;
     let startTimeInteger = Number(startTimeString);
     
     if (startTimeInteger > 100) {
       for (let i = 0; i < splitValueArrayLength; i++) {
+
         randomizedTimedNamesArray.push([startTimeInteger, " - ", randomizedNamesArray[i]]);
         randomizedTimedNamesArray[i] = randomizedTimedNamesArray[i].join("");
-        console.log();
+
         if (startTimeInteger % 100 > 39) {
           startTimeInteger += 60;
         } else {
@@ -45,20 +51,32 @@ function Form() {
     return randomizedTimedNamesArray;
   }
 
+  const handleShuffleData = event => {
+    event.preventDefault();
+    let shuffledArray = nameArray.split("\n").sort((a,b) => 0.5 - Math.random());
+    setShuffledNameArray(addTimeslotsToRandomizedList(time, shuffledArray));
+  };
 
   return (
-    <div className="form">
-        <label>
-          Names 
-          <textarea {...bindName} />
-        </label>
-        <label>
-          Time
-          <input type="text" {...bindTime} />
-        </label>
-      <Output names={randomizeNames(name)}/>
+    <div className="randomizer-container">
+      <div className="wrapper">
+        <div className="title">
+          <h2>Randomizer</h2>
+          <p>The Lambda Randomizer is designed to make the team lead's job easier. Paste your list of stuends in the text area below and click the Shuffle button to recieve a randomly sorted list of your students with their automatically assigned time slots. Now you can just copy and paste the time slots into your team's Slack channel.</p>
+        </div>
+        <textarea value={nameArray} onChange={handleNameChange} />
+        <input value={time} type="text" pattern="[0-9]*" onChange={handleTimeChange} />
+        <div className="randomizer-output">
+        {typeof(shuffledNameArray) === "object" ? shuffledNameArray.map((name) =>
+          <li>{name}</li>
+        ) : null}
+        </div>
+        <button type="button" onClick={handleSaveData}>Save Data to Local Storage</button>
+        <button type="button" onClick={handleLoadData}>Load Data from Local Storage</button>
+        <button type="button" onClick={handleShuffleData}>Shuffle Array</button>
+      </div>
     </div>
-  )
+  );
 }
 
 export default Randomizer;

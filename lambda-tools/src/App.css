@@ -2,25 +2,40 @@
   display: flex;
 }
 
-h2 {
-  font-size: 16px;
+
+.title h2 {
+  font-size: 3rem;
+  font-weight: 500;
   color: black;
 }
 
 .side-bar {
   display: flex;
-  width: 25%;
+  width: 15%;
   background: #14121f;
   height: 100vh;
   color: white;
 }
 
 .right-container {
-  width: 75%;
+  width: 85%;
   background: #f0f4f7;
   height: 100vh;
 }
 
+.randomizer-container {
+}
+.wrapper {
+  margin: 64px 8px;
+}
+.title {
+  background: white;
+  padding: 35px 25px;
+}
 textarea {
   height: 200px;
+}
+
+.randomizer-output {
+  display: block;
 }

@@ -1,8 +1,10 @@
-import Home from './components/Home';
+import Home from './components/Home/Home';
 import Randomizer from './components/Randomizer/Randomizer';
+import Sidebar from './components/Sidebar';
 import React from "react";
 import './App.css';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import './css-reset.css';
+import { BrowserRouter as Router, Route} from "react-router-dom";
 
 function App() {
   return (
@@ -15,14 +17,6 @@ function App() {
         </div>
       </div>
     </Router>
-  );
-}
-
-function Sidebar() {
-  return (
-    <div className="side-bar">
-      <Link to='random'>Randomizer</Link>
-    </div>
   );
 }
 
