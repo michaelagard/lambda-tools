@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import RandomizerOutput from './RandomizerOutput';
 import ToolTitle from '../ToolTitle';
-import Form from '../Form';
+import TextAreaForm from '../TextAreaForm';
 import Button from '../Button';
 
 function Randomizer() {
@@ -79,14 +79,14 @@ function Randomizer() {
               <Button onClickAction={handleShuffleData} 
               title={"Shuffle"}/>
             </div>
-            <Form formType="textarea"
+            <TextAreaForm formType="textarea"
               formName="List of Names"
               formClassName="randomizer-names-form"
               inputText={nameArray}
               handleInputText={handleNameChange}
               placeHolderText={"Seperate names by a newline"}/>
 
-            <Form formType="input"
+            <TextAreaForm formType="input"
               formName="Starting Time"
               formClassName="randomizer-time-form"
               inputText={time}

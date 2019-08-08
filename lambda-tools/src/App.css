@@ -118,7 +118,8 @@
 	height: 12rem;
 	border: 3px solid #cccc;
 	padding: 5px;
-	font-family: Tahoma, sans-serif;
+  font-family: Tahoma, sans-serif;
+  resize: vertical;
 }
 
 .randomizer-time-form textarea {
