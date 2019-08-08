@@ -4,7 +4,7 @@ import Sidebar from './components/Sidebar';
 import React from "react";
 import './App.css';
 import './css-reset.css';
-import { BrowserRouter as Router, Route, withRouter} from "react-router-dom";
+import { BrowserRouter as Router, Route} from "react-router-dom";
 
 function App() {
   return (
