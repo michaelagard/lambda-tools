@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
-const minimum = 0;
+import RandomizerOutput from './RandomizerOutput';
+import ToolTitle from '../ToolTitle';
+import Form from '../Form';
+import Button from '../Button';
+
 function Randomizer() {
-  const [nameArray, setNameArray] = useState("Michael\nJess\nAlan\nPatrick\nKyle\nMax\nJeremy")
+  const titleData = {title: "Randomizer", titleDescription: "The Lambda Randomizer is designed to make the team lead's job easier. Paste your list of stuends in the text area below and click the Shuffle button to recieve a randomly sorted list of your students with their automatically assigned time slots. Now you can just copy and paste the time slots into your team's Slack channel. This tool currently only supports military time."}
+  const [nameArray, setNameArray] = useState("")
   const [time, setTime] = useState("");
   const [shuffledNameArray, setShuffledNameArray] = useState("")
 
-  const handleNameChange = (event) => {
+  function handleNameChange(event){
     setNameArray(event.target.value)
   }
 
@@ -14,7 +19,7 @@ function Randomizer() {
   }
 
   function validateInteger(count) {
-    return parseInt(count) | minimum;
+    return parseInt(count) | 0;
   }
 
   const handleSaveData = event => {
@@ -22,11 +27,13 @@ function Randomizer() {
     let submitData = nameArray.split("\n");
     submitData = submitData.filter(function(name) { return name.trim() !== ''; });
     localStorage.setItem("nameArray", JSON.stringify(submitData));
+    localStorage.setItem("time", JSON.stringify(time));
   }
 
   const handleLoadData = event => {
     event.preventDefault();
     setNameArray(JSON.parse(localStorage.getItem("nameArray")).join("\n"));
+    setTime(JSON.parse(localStorage.getItem("time")));
   }
 
   const addTimeslotsToRandomizedList = (startTimeString, randomizedNamesArray) => {
@@ -53,27 +60,41 @@ function Randomizer() {
 
   const handleShuffleData = event => {
     event.preventDefault();
-    let shuffledArray = nameArray.split("\n").sort((a,b) => 0.5 - Math.random());
+
+    let shuffledArray = nameArray.split("\n").sort((name1,name2) => 0.5 - Math.random());
     setShuffledNameArray(addTimeslotsToRandomizedList(time, shuffledArray));
   };
 
   return (
     <div className="randomizer-container">
+      <ToolTitle titleData={titleData}/>
       <div className="wrapper">
-        <div className="title">
-          <h2>Randomizer</h2>
-          <p>The Lambda Randomizer is designed to make the team lead's job easier. Paste your list of stuends in the text area below and click the Shuffle button to recieve a randomly sorted list of your students with their automatically assigned time slots. Now you can just copy and paste the time slots into your team's Slack channel.</p>
+        <div className="randomizer-form">
+          <form>
+            <div className="randomizer-buttons">
+              <Button onClickAction={handleSaveData}
+              title={"Save"}/>
+              <Button onClickAction={handleLoadData}
+              title={"Load"}/>
+              <Button onClickAction={handleShuffleData} 
+              title={"Shuffle"}/>
+            </div>
+            <Form formType="textarea"
+              formName="List of Names"
+              formClassName="randomizer-names-form"
+              inputText={nameArray}
+              handleInputText={handleNameChange}
+              placeHolderText={"Seperate names by a newline"}/>
+
+            <Form formType="input"
+              formName="Starting Time"
+              formClassName="randomizer-time-form"
+              inputText={time}
+              handleInputText={handleTimeChange}
+              placeHolderText={"HH:MM"}/>
+          </form>
+          <RandomizerOutput shuffledNameArray={shuffledNameArray}/>
         </div>
-        <textarea value={nameArray} onChange={handleNameChange} />
-        <input value={time} type="text" pattern="[0-9]*" onChange={handleTimeChange} />
-        <div className="randomizer-output">
-        {typeof(shuffledNameArray) === "object" ? shuffledNameArray.map((name) =>
-          <li>{name}</li>
-        ) : null}
-        </div>
-        <button type="button" onClick={handleSaveData}>Save Data to Local Storage</button>
-        <button type="button" onClick={handleLoadData}>Load Data from Local Storage</button>
-        <button type="button" onClick={handleShuffleData}>Shuffle Array</button>
       </div>
     </div>
   );
