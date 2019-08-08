@@ -5,7 +5,7 @@ import Form from '../Form';
 import Button from '../Button';
 
 function Randomizer() {
-  const titleData = {title: "Randomizer", titleDescription: "The Lambda Randomizer is designed to make the team lead's job easier. Paste your list of stuends in the text area below and click the Shuffle button to recieve a randomly sorted list of your students with their automatically assigned time slots. Now you can just copy and paste the time slots into your team's Slack channel. This tool currently only supports military time."}
+  const titleData = {title: "Randomizer", titleDescription: "The Lambda Randomizer is designed to make the team lead's job easier. Paste your list of stuends in the text area below and click the Shuffle button to recieve a randomly sorted list of your students with their automatically assigned time slots. Now you can just copy and paste the time slots into your team's Slack channel. This tool currently only supports military time."}  
   const [nameArray, setNameArray] = useState("")
   const [time, setTime] = useState("");
   const [shuffledNameArray, setShuffledNameArray] = useState("")
@@ -91,7 +91,8 @@ function Randomizer() {
               formClassName="randomizer-time-form"
               inputText={time}
               handleInputText={handleTimeChange}
-              placeHolderText={"HH:MM"}/>
+              placeHolderText={"HH:MM"}
+              maxLength="4"/>
           </form>
           <RandomizerOutput shuffledNameArray={shuffledNameArray}/>
         </div>
