@@ -79,15 +79,13 @@ function Randomizer() {
               <Button onClickAction={handleShuffleData} 
               title={"Shuffle"}/>
             </div>
-            <TextAreaForm formType="textarea"
-              formName="List of Names"
+            <TextAreaForm formName="List of Names"
               formClassName="randomizer-names-form"
               inputText={nameArray}
               handleInputText={handleNameChange}
               placeHolderText={"Seperate names by a newline"}/>
 
-            <TextAreaForm formType="input"
-              formName="Starting Time"
+            <TextAreaForm formName="Starting Time"
               formClassName="randomizer-time-form"
               inputText={time}
               handleInputText={handleTimeChange}
