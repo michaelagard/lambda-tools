@@ -13,14 +13,21 @@
   flex-direction: column;
 }
 
+@media(max-width: 500px) {
+  .side-bar {
+    display: none;
+  }
+}
+
 .side-bar h1 {
-  font-size: 2.2rem;
+  font-size: 2vw;
   padding: 2.65rem 1.5rem;
 }
 
 .side-bar a {
   color: #f0f4f7;
   text-decoration: none;
+  font-size: 1vw;
   padding: .35rem 1.5rem;
 }
 
@@ -40,7 +47,6 @@
 /* Right container */
 
 .right-container {
-  width: 85%;
   background: #f0f4f7;
   min-height: 100vh;
 }
