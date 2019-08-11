@@ -1,12 +1,12 @@
 import React from 'react';
-
+import { FormWrapper, FormTitle, TextArea } from './TextAreaForm.styled';
 function TextAreaForm(props) {
 
 	return (
-    <div className={props.formClassName}>
-      <h4>{props.formName}</h4>
-      <textarea maxLength={props.maxLength} value={props.inputText} placeholder={props.placeHolderText} onChange={props.handleInputText.bind(props)} /> 
-    </div>
+    <FormWrapper>
+      <FormTitle>{props.formName}</FormTitle>
+      <TextArea maxLength={props.maxLength} value={props.inputText} placeholder={props.placeHolderText} onChange={props.handleInputText.bind(props)} /> 
+    </FormWrapper>
 	)
 }
 

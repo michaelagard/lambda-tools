@@ -9,19 +9,19 @@ function Sidebar() {
       <SideBarLink exact to={`/`}>Home</SideBarLink>
       <SideBarH3>Lambda Tools</SideBarH3>
       <SideBarLink exact to={`/random`}>
-          1. Student Randomizer
+          Student Randomizer
       </SideBarLink>
       <SideBarLink exact to={`iwontwork`}>
-          2. Code Challenge Prompts
+          Code Challenge Prompts
       </SideBarLink>
       <SideBarLink exact to={`iwontwork`}>
-          3. A Useful Tool
+          A Useful Tool
       </SideBarLink>
       <SideBarLink exact to={`iwontwork`}>
-          4. A Nice Thought
+          A Nice Thought
       </SideBarLink>
       <SideBarLink exact to={`iwontwork`}>
-          5. Student Notes
+          Student Notes
       </SideBarLink>
     </SideBarWrapper>
   );

@@ -1,41 +1,8 @@
-.main-container {
-  display: flex;
-}
-
-
 
 /* Right container */
 
-.right-container {
-  background: #f0f4f7;
-  min-height: 100vh;
-}
-
 .wrapper {
   margin: 55px 8px;
-}
-
-.title {
-  background: #fff;
-  margin: 10px 10px 10px 10px;
-  border-radius: .3rem;
-  box-sizing: border-box;
-  padding: 4rem 2rem;
-}
-
-.title h2 {
-  font-size: 3rem;
-  margin-top: 1rem;
-  margin-bottom: .5rem;
-  font-weight: 500;
-}
-
-.title p {
-  margin-top: 5rem;
-  margin-left: 1rem;
-  margin-bottom: 1rem;
-  font-size: 1.25rem;
-  font-weight: 300;
 }
 
 .randomizer-form {

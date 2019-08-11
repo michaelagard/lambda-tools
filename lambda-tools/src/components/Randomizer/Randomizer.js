@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
+import { Container, RandomizerForm } from './Randomizer.styled';
 import RandomizerOutput from './RandomizerOutput';
-import ToolTitle from '../Home/ToolTitle';
+import ToolTitle from '../ToolTitle/ToolTitle';
 import TextAreaForm from '../Forms/TextAreaForm';
 import InputForm from '../Forms/InputForm';
-import Button from '../Button';
+import Button from '../Button/Button';
 
 function Randomizer() {
   const titleData = {title: "Randomizer", titleDescription: "The Lambda Randomizer is designed to make the team lead's job easier. Paste your list of stuends in the text area below and click the Shuffle button to recieve a randomly sorted list of your students with their automatically assigned time slots. Now you can just copy and paste the time slots into your team's Slack channel. This tool currently only supports military time."}  
@@ -97,11 +98,9 @@ function Randomizer() {
   }
 
   return (
-    <div className="randomizer-container">
+    <Container>
       <ToolTitle titleData={titleData}/>
-      <div className="wrapper">
-        <div className="randomizer-form">
-          <form>
+        <RandomizerForm>
             <div className="randomizer-buttons">
               <Button onClickAction={handleSaveData}
               title={"Save"}/>
@@ -117,7 +116,7 @@ function Randomizer() {
               placeHolderText={"Seperate names by a newline"}/>
 
             <InputForm formName="Starting Time"
-              type={"time"}
+              type="time"
               formClassName="randomizer-time-form"
               inputText={timeStr}
               handleInputText={handleTimeChange}
@@ -125,16 +124,14 @@ function Randomizer() {
               maxLength="8"
               />
             <InputForm formName="Minute Increment"
-              type={"number"}
+              type="number"
               formClassName="randomizer-time-form"
               inputText={timeIncrementStr}
               handleInputText={handleTimeIncrementChange}
               />
-          </form>
           <RandomizerOutput shuffledNameArray={shuffledNameArray}/>
-        </div>
-      </div>
-    </div>
+        </RandomizerForm>
+    </Container>
   );
 }
 

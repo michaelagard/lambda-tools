@@ -2,7 +2,7 @@ import Home from './components/Home/Home';
 import Randomizer from './components/Randomizer/Randomizer';
 import Sidebar from './components/Sidebar/Sidebar';
 import React from "react";
-import './css/App.css';
+// import './css/App.css';
 import './css/css-reset.css';
 import { BrowserRouter as Router, Route} from "react-router-dom";
 import { Wrapper, RightContainer} from './App.styled';
