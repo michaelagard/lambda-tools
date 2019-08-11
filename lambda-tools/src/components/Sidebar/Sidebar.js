@@ -17,11 +17,11 @@ function Sidebar() {
       </NavLink>
       <NavLink exact to={`iwontwork`}
         activeClassName="active">
-          3. Greeting Generators
+          3. A Useful Tool
       </NavLink>
       <NavLink exact to={`iwontwork`}
         activeClassName="active">
-          4. Who Knows
+          4. A Nice Thought
       </NavLink>
       <NavLink exact to={`iwontwork`}
         activeClassName="active">

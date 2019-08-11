@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import RandomizerOutput from './RandomizerOutput';
-import ToolTitle from '../ToolTitle';
-import TextAreaForm from '../TextAreaForm';
-import InputForm from '../InputForm';
+import ToolTitle from '../Home/ToolTitle';
+import TextAreaForm from '../Forms/TextAreaForm';
+import InputForm from '../Forms/InputForm';
 import Button from '../Button';
 
 function Randomizer() {
@@ -15,7 +15,7 @@ function Randomizer() {
   const handleNameChange = (event) => { setNameArray(event.target.value); }
   const handleTimeChange = (event) => { setTimeStr(event.target.value); }
   const handleTimeIncrementChange = (event) => { setTimeIncrementStr(event.target.value); }
-  
+
   // saves nameArray & timeStr & timeIncrementStr to localstorage
   const handleSaveData = event => {
     event.preventDefault();
