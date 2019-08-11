@@ -5,17 +5,18 @@ import React from "react";
 import './css/App.css';
 import './css/css-reset.css';
 import { BrowserRouter as Router, Route} from "react-router-dom";
+import { Wrapper, RightContainer} from './App.styled';
 
 function App() {
   return (
     <Router>
-      <div className="main-container">
+      <Wrapper>
         <Sidebar/>
-        <div className="right-container">
+        <RightContainer>
           <Route exact path="/" component={Home} />
           <Route path="/random" component={Randomizer} />
-        </div>
-      </div>
+        </RightContainer>
+      </Wrapper>
     </Router>
   );
 }

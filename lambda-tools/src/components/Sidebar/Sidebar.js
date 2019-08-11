@@ -1,33 +1,29 @@
 import React from 'react';
-import { NavLink, withRouter } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
+import { SideBarWrapper, SideBarH1, SideBarH3, SideBarLink } from "./Sidebar.styled";
 
 function Sidebar() {
   return (
-    <div className="side-bar">
-      <h1>Lambdorks</h1>
-      <NavLink exact to={`/`}>Home</NavLink>
-      <h3>Lambda Tools</h3>
-      <NavLink exact to={`/random`}
-        activeClassName="active">
+    <SideBarWrapper>
+      <SideBarH1>Lambdorks</SideBarH1>
+      <SideBarLink exact to={`/`}>Home</SideBarLink>
+      <SideBarH3>Lambda Tools</SideBarH3>
+      <SideBarLink exact to={`/random`}>
           1. Student Randomizer
-      </NavLink>
-      <NavLink exact to={`iwontwork`}
-        activeClassName="active">
+      </SideBarLink>
+      <SideBarLink exact to={`iwontwork`}>
           2. Code Challenge Prompts
-      </NavLink>
-      <NavLink exact to={`iwontwork`}
-        activeClassName="active">
+      </SideBarLink>
+      <SideBarLink exact to={`iwontwork`}>
           3. A Useful Tool
-      </NavLink>
-      <NavLink exact to={`iwontwork`}
-        activeClassName="active">
+      </SideBarLink>
+      <SideBarLink exact to={`iwontwork`}>
           4. A Nice Thought
-      </NavLink>
-      <NavLink exact to={`iwontwork`}
-        activeClassName="active">
+      </SideBarLink>
+      <SideBarLink exact to={`iwontwork`}>
           5. Student Notes
-      </NavLink>
-    </div>
+      </SideBarLink>
+    </SideBarWrapper>
   );
 }
 

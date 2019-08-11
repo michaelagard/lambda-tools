@@ -48,6 +48,11 @@ function Randomizer() {
 
   // Generates time slots from timeStr/timeIncrementStr state 
   const generateMilitaryTimeSlots = (shuffledNameArrayLength, fullTimeInt, timeIncrementInt) => {
+
+    const timeUnitIntToStrWithPadding = (timeUnitInt) => {
+      return timeUnitInt.toString().padStart(2, '0');
+    }
+    
     let timeSlotArray = [];
     let fullTimeStr = fullTimeInt.toString().padStart(4, '0');
     // Used to check conditionals below
@@ -68,8 +73,8 @@ function Randomizer() {
         minuteInt += timeIncrementInt;
       }
 
-      fullTimeInt = parseInt(hourInt.toString().padStart(2, '0') + minuteInt.toString().padStart(2, '0'))
-      fullTimeStr = hourInt.toString().padStart(2, '0') + minuteInt.toString().padStart(2, '0')
+      fullTimeInt = parseInt(timeUnitIntToStrWithPadding(hourInt) + timeUnitIntToStrWithPadding(minuteInt));
+      fullTimeStr = timeUnitIntToStrWithPadding(hourInt) + timeUnitIntToStrWithPadding(minuteInt);
       timeSlotArray.push(fullTimeStr);
     }
     return timeSlotArray;
@@ -124,8 +129,6 @@ function Randomizer() {
               formClassName="randomizer-time-form"
               inputText={timeIncrementStr}
               handleInputText={handleTimeIncrementChange}
-              // placeHolderText={"HH:MM"}
-              // maxLength="8"
               />
           </form>
           <RandomizerOutput shuffledNameArray={shuffledNameArray}/>
