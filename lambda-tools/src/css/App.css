@@ -2,11 +2,14 @@
   display: flex;
 }
 
-/* Side-bar */
-
+/* nav */
+.horizontal-bar {
+  display: none;
+}
 .side-bar {
   display: flex;
   width: 15%;
+  min-width: 195px;
   background: #14121f;
   color: white;
   min-height: 100vh;
@@ -17,17 +20,20 @@
   .side-bar {
     display: none;
   }
+  .horizontal-bar {
+    
+  }
 }
 
 .side-bar h1 {
-  font-size: 2vw;
+  font-size: 2rem;
   padding: 2.65rem 1.5rem;
 }
 
 .side-bar a {
   color: #f0f4f7;
   text-decoration: none;
-  font-size: 1vw;
+  font-size: 1rem;
   padding: .35rem 1.5rem;
 }
 
