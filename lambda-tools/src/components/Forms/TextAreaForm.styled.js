@@ -8,7 +8,7 @@ export const FormWrapper = styled.div`
 
 export const TextArea = styled.textarea`
   display: flex;
-  height: 20rem;
+  height: 15rem;
 `;
 
 export const FormTitle = styled.h4`
