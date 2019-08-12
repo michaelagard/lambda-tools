@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Container, RandomizerForm } from './Randomizer.styled';
+import { Wrapper, RandomizerForm } from './Randomizer.styled';
 import RandomizerOutput from './RandomizerOutput';
 import ToolTitle from '../ToolTitle/ToolTitle';
 import TextAreaForm from '../Forms/TextAreaForm';
@@ -98,17 +98,9 @@ function Randomizer() {
   }
 
   return (
-    <Container>
+    <Wrapper>
       <ToolTitle titleData={titleData}/>
         <RandomizerForm>
-            <div className="randomizer-buttons">
-              <Button onClickAction={handleSaveData}
-              title={"Save"}/>
-              <Button onClickAction={handleLoadData}
-              title={"Load"}/>
-              <Button onClickAction={handleShuffleNameArray} 
-              title={"Shuffle"}/>
-            </div>
             <TextAreaForm formName="List of Names"
               formClassName="randomizer-names-form"
               inputText={nameArray}
@@ -129,9 +121,17 @@ function Randomizer() {
               inputText={timeIncrementStr}
               handleInputText={handleTimeIncrementChange}
               />
-          <RandomizerOutput shuffledNameArray={shuffledNameArray}/>
+          <div className="randomizer-buttons">
+              <Button onClickAction={handleSaveData}
+              title={"Save"}/>
+              <Button onClickAction={handleLoadData}
+              title={"Load"}/>
+              <Button onClickAction={handleShuffleNameArray} 
+              title={"Shuffle"}/>
+          </div>
         </RandomizerForm>
-    </Container>
+        <RandomizerOutput shuffledNameArray={shuffledNameArray}/>
+    </Wrapper>
   );
 }
 
