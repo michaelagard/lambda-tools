@@ -9,7 +9,6 @@ export const RandomizerForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-self: center;
-  /* width: 300px; */
   background: white;
   margin-top: 2rem;
   padding: 2rem 2rem 3rem;
