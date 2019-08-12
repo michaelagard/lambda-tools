@@ -1,15 +1,16 @@
 import React from 'react';
+import { UnorderedList, ListItem } from './RandomizerOutput.styled';
 
 function RandomizerOutput(props) {
 
 	return (
-		<div className="randomizer-output">
+		<UnorderedList>
 
 			{typeof(props.shuffledNameArray) === "object" ? props.shuffledNameArray.map((name) =>
-			<li key={name}>{name}</li>
+			<ListItem key={name}>{name}</ListItem>
 			) : null}
 
-		</div>
+		</UnorderedList>
 	)
 }
 
