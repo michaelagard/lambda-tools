@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import { Wrapper, RandomizerForm } from './Randomizer.styled';
 import RandomizerOutput from './RandomizerOutput';
-import ToolTitle from '../ToolTitle/ToolTitle';
-import TextAreaForm from '../Forms/TextAreaForm';
-import InputForm from '../Forms/InputForm';
-import Button from '../Button/Button';
+import ToolTitle from '../Subcomponents/ToolTitle/ToolTitle';
+import TextAreaForm from '../Subcomponents/Forms/TextAreaForm';
+import InputForm from '../Subcomponents/Forms/InputForm';
+import Button from '../Subcomponents/Button/Button';
 
 function Randomizer() {
   const titleData = {title: "Randomizer", titleDescription: "The Lambda Randomizer is designed to make the team lead's job easier. Paste your list of stuends in the text area below and click the Shuffle button to recieve a randomly sorted list of your students with their automatically assigned time slots. Now you can just copy and paste the time slots into your team's Slack channel. This tool currently only supports military time."}  
