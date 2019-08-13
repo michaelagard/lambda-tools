@@ -9,6 +9,15 @@ export const FormWrapper = styled.div`
 export const TextArea = styled.textarea`
   display: flex;
   height: 15rem;
+  border: 1px solid grey;
+  border-radius: 2%;
+  &:hover {
+    background: #EEE;
+    transition: .5s;
+  }
+  &:focus {
+    border: 1px solid black;
+  }
 `;
 
 export const FormTitle = styled.h4`

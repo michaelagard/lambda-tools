@@ -8,6 +8,17 @@ export const FormWrapper = styled.div`
 
 export const FormInput = styled.input`
   display: flex;
+  border: 1px solid grey;
+  border-radius: 5%;
+  cursor: text;
+  &:hover {
+    background: #EEE;
+    transition: .5s;
+  }
+  &:focus {
+    border: 1px solid black;
+  }
+  
 `;
 
 export const FormTitle = styled.h4`
