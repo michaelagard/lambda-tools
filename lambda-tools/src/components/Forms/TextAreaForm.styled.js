@@ -22,6 +22,6 @@ export const TextArea = styled.textarea`
 
 export const FormTitle = styled.h4`
   font-size: 1.6rem;
-  width: 15%;
+  width: 15rem;
   min-width: 11rem;
 `;

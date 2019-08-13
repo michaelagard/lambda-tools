@@ -5,8 +5,8 @@ const lambdaLightBlue = "#14121f";
 
 export const SideBarWrapper = styled.div`
   display: flex;
-  width: 18%;
-  min-width: 22rem;
+  width: 26rem;
+  min-width: 28rem;
   background: ${lambdaLightBlue};
   color: white;
   min-height: 100vh;
