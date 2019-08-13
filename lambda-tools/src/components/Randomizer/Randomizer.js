@@ -7,7 +7,7 @@ import InputForm from '../Subcomponents/Forms/InputForm';
 import Button from '../Subcomponents/Button/Button';
 
 function Randomizer() {
-  const titleData = {title: "Randomizer", titleDescription: "The Lambda Randomizer is designed to make the team lead's job easier. Paste your list of stuends in the text area below and click the Shuffle button to recieve a randomly sorted list of your students with their automatically assigned time slots. Now you can just copy and paste the time slots into your team's Slack channel. This tool currently only supports military time."}  
+  const titleData = {title: "Randomizer", titleDescription: "The Lambda Randomizer is designed to make the team lead's job easier. Paste your list of students in the text area below and click the `Shuffle` button to recieve a randomly sorted list of your students with their automatically assigned time slots. This tool currently only supports military time output."}  
   const [nameArray, setNameArray] = useState("")
   const [timeStr, setTimeStr] = useState("");
   const [timeIncrementStr, setTimeIncrementStr] = useState("");
@@ -78,6 +78,7 @@ function Randomizer() {
       fullTimeStr = timeUnitIntToStrWithPadding(hourInt) + timeUnitIntToStrWithPadding(minuteInt);
       timeSlotArray.push(fullTimeStr);
     }
+    
     return timeSlotArray;
   }
 
