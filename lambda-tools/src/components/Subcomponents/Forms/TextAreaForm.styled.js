@@ -9,6 +9,8 @@ export const FormWrapper = styled.div`
 export const TextArea = styled.textarea`
   display: flex;
   height: 15rem;
+  width: ${props => props.width ? props.width : ""};
+  resize: ${props => props.resize ? "none" : ""}
   border: 1px solid grey;
   border-radius: 2%;
   &:hover {
