@@ -1,5 +1,6 @@
 import Home from './components/Home/Home';
 import Randomizer from './components/Randomizer/Randomizer';
+import StudentCTA from './components/StudentCTA/StudentCTA';
 import Sidebar from './components/Sidebar/Sidebar';
 import React from "react";
 // import './css/App.css';
@@ -14,7 +15,8 @@ function App() {
         <Sidebar/>
         <RightContainer>
           <Route exact path="/" component={Home} />
-          <Route path="/random" component={Randomizer} />
+          <Route exact path="/random" component={Randomizer} />
+          <Route exact path="/studentcta" component={StudentCTA} />
         </RightContainer>
       </Wrapper>
     </Router>
