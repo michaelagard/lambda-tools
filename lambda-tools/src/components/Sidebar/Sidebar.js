@@ -5,7 +5,7 @@ import { SideBarWrapper, SideBarH1, SideBarH3, SideBarLink } from "./Sidebar.sty
 function Sidebar() {
   return (
     <SideBarWrapper>
-      <SideBarH1>Lambdorks</SideBarH1>
+      <SideBarH1>Lambdork</SideBarH1>
       <SideBarLink exact to={`/`}>Home</SideBarLink>
       <SideBarH3>Lambda Tools</SideBarH3>
       <SideBarLink exact to={`/random`}>
@@ -14,8 +14,8 @@ function Sidebar() {
       <SideBarLink exact to={`iwontwork`}>
           Code Challenge Prompts
       </SideBarLink>
-      <SideBarLink exact to={`iwontwork`}>
-          A Useful Tool
+      <SideBarLink exact to={`/studentcta`}>
+          Student CTA
       </SideBarLink>
       <SideBarLink exact to={`iwontwork`}>
           A Nice Thought
