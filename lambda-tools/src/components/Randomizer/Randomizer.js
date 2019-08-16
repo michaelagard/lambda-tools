@@ -50,11 +50,11 @@ function Randomizer() {
   const convertMilitaryTimeToRegularTime = (hourInt, minuteInt) => {
     if (hourInt >= 13) { return `${hourInt - 12}:${minuteInt.toString().padStart(2, '0')} PM`; }
 
-    if (hourInt === 12) { return `${hourInt}:${minuteInt.toString().padStart(2, '0')} PM`; }
+    if (hourInt == 12) { return `${hourInt}:${minuteInt.toString().padStart(2, '0')} PM`; }
 
-    if (hourInt === 0) { return `${hourInt}:${minuteInt.toString().padStart(2, '0')} AM`; }
+    if (hourInt == 0) { return `12:${minuteInt.toString().padStart(2, '0')} AM`; }
 
-    return `${hourInt}:${minuteInt.toString().padStart(2, '0')} AM`;
+    return `${hourInt.toString().replace('0', '')}:${minuteInt.toString().padStart(2, '0')} AM`;
   }
 
   // Generates time slots from timeStr/timeIncrementStr state 
