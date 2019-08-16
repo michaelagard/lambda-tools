@@ -47,6 +47,16 @@ function Randomizer() {
     return [minute, hour];
   }
 
+  const convertMilitaryTimeToRegularTime = (hourInt, minuteInt) => {
+    if (hourInt >= 13) { return `${hourInt - 12}:${minuteInt.toString().padStart(2, '0')} PM`; }
+
+    if (hourInt === 12) { return `${hourInt}:${minuteInt.toString().padStart(2, '0')} PM`; }
+
+    if (hourInt === 0) { return `${hourInt}:${minuteInt.toString().padStart(2, '0')} AM`; }
+
+    return `${hourInt}:${minuteInt.toString().padStart(2, '0')} AM`;
+  }
+
   // Generates time slots from timeStr/timeIncrementStr state 
   const generateMilitaryTimeSlots = (shuffledNameArrayLength, fullTimeInt, timeIncrementInt) => {
 
@@ -55,11 +65,13 @@ function Randomizer() {
     }
     
     let timeSlotArray = [];
-    let fullTimeStr = fullTimeInt.toString().padStart(4, '0');
+    let fullTimeStr = fullTimeInt.toString();
+
     // Used to check conditionals below
     let [minuteInt, hourInt] = parseTimeFromString(fullTimeStr);
-    
-    timeSlotArray.push(fullTimeStr.replace(":", ""));
+
+    timeSlotArray.push(convertMilitaryTimeToRegularTime(hourInt, minuteInt));
+
     for (let i = 0; i < shuffledNameArrayLength; i++) {
       // Checks if the time is > than 2360 after incrementing
       if ((fullTimeInt + timeIncrementInt) >= 2360) {
@@ -76,7 +88,8 @@ function Randomizer() {
 
       fullTimeInt = parseInt(timeUnitIntToStrWithPadding(hourInt) + timeUnitIntToStrWithPadding(minuteInt));
       fullTimeStr = timeUnitIntToStrWithPadding(hourInt) + timeUnitIntToStrWithPadding(minuteInt);
-      timeSlotArray.push(fullTimeStr);
+
+      timeSlotArray.push(convertMilitaryTimeToRegularTime(timeUnitIntToStrWithPadding(hourInt), timeUnitIntToStrWithPadding(minuteInt)));
     }
     
     return timeSlotArray;
