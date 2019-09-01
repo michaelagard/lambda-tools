@@ -20,16 +20,23 @@ function Randomizer() {
   // saves nameArray & timeStr & timeIncrementStr to localstorage
   const handleSaveData = event => {
     event.preventDefault();
-    localStorage.setItem("nameArray", JSON.stringify(nameArray.split("\n").filter(function(name) { return name.trim() !== ''; })));
-    localStorage.setItem("time", JSON.stringify(timeStr));
-    localStorage.setItem("timeIncrement", JSON.stringify(timeIncrementStr))
+    const nameArrayFormatted = nameArray.split("\n").filter(function(name) { return name.trim() !== ''; })
+
+    nameArray !== "" ? localStorage.setItem("nameArray", JSON.stringify(nameArrayFormatted)) : console.log("No nameArray found in state.");
+    timeStr !== "" ? localStorage.setItem("time", JSON.stringify(timeStr)) : console.log("No timeStr found in state.")
+    timeIncrementStr !== "" ? localStorage.setItem("timeIncrement", JSON.stringify(timeIncrementStr)) : console.log("No timeIncrementStr found in state.")
   }
+
   // loads nameArray & timeStr & timeIncrementStr to localstorage
   const handleLoadData = event => {
     event.preventDefault();
-    setNameArray(JSON.parse(localStorage.getItem("nameArray")).join("\n"));
-    setTimeStr(JSON.parse(localStorage.getItem("time")));
-    setTimeIncrementStr(JSON.parse(localStorage.getItem("timeIncrement")));
+    const nameArray = localStorage.getItem("nameArray");
+    const time = localStorage.getItem("time");
+    const timeIncrement = localStorage.getItem("timeIncrement");
+
+    nameArray !== null ? setNameArray(JSON.parse(nameArray).join("\n")) : console.log("No nameArray found in localStorage"); // handle error here
+    time !== null ? setTimeStr(JSON.parse(time)) : console.log("No time found in localStorage"); // handle error here
+    timeIncrement !== null ? setTimeIncrementStr(JSON.parse(timeIncrement)) : console.log("No timeIncrement found in localStorage"); // handle error here
   };
 
   // Clicking the button associated, uses the nameArray
