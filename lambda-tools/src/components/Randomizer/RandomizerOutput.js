@@ -7,7 +7,7 @@ function RandomizerOutput(props) {
 		<UnorderedList>
 
 			{typeof(props.shuffledNameArray) === "object" ? props.shuffledNameArray.map((object) =>
-			<ListItem key={object.id}>{object.time} - {object.name} </ListItem>
+			<ListItem key={object.id}><time>{object.time}</time> - {object.name} </ListItem>
 			) : null}
 
 		</UnorderedList>
