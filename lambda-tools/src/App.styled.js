@@ -5,6 +5,6 @@ export const Wrapper = styled.div`
 `;
 
 export const RightContainer = styled.div`
-  width: 100%;
   background: #f0f4f7;
+  width: 100%;
 `;
