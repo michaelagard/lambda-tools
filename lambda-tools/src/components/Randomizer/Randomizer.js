@@ -18,17 +18,17 @@ function Randomizer() {
   const handleTimeIncrementChange = (event) => { setTimeIncrementStr(event.target.value); }
 
   // saves nameArray & timeStr & timeIncrementStr to localstorage
-  const handleSaveData = event => {
+  const handleRandomizerSaveData = event => {
     event.preventDefault();
     const nameArrayFormatted = nameArray.split("\n").filter(function(name) { return name.trim() !== ''; })
 
-    nameArray !== "" ? localStorage.setItem("nameArray", JSON.stringify(nameArrayFormatted)) : console.log("No nameArray found in state.");
-    timeStr !== "" ? localStorage.setItem("time", JSON.stringify(timeStr)) : console.log("No timeStr found in state.")
-    timeIncrementStr !== "" ? localStorage.setItem("timeIncrement", JSON.stringify(timeIncrementStr)) : console.log("No timeIncrementStr found in state.")
+    nameArray !== "" ? localStorage.setItem("nameArray", JSON.stringify(nameArrayFormatted)) : console.log("No nameArray found in state."); // handle error here
+    timeStr !== "" ? localStorage.setItem("time", JSON.stringify(timeStr)) : console.log("No timeStr found in state.") // handle error here
+    timeIncrementStr !== "" ? localStorage.setItem("timeIncrement", JSON.stringify(timeIncrementStr)) : console.log("No timeIncrementStr found in state."); // handle error here
   }
 
   // loads nameArray & timeStr & timeIncrementStr to localstorage
-  const handleLoadData = event => {
+  const handleRandomizerLoadData = event => {
     event.preventDefault();
     const nameArray = localStorage.getItem("nameArray");
     const time = localStorage.getItem("time");
@@ -39,7 +39,7 @@ function Randomizer() {
     timeIncrement !== null ? setTimeIncrementStr(JSON.parse(timeIncrement)) : console.log("No timeIncrement found in localStorage"); // handle error here
   };
 
-  const deleteLocalStorage = event => {
+  const deleteRandomizerLocalStorage = event => {
     event.preventDefault();
     localStorage.removeItem("nameArray");
     localStorage.removeItem("time");
@@ -55,7 +55,6 @@ function Randomizer() {
 
     let shuffledNameArray = nameArray.split("\n").sort(() => 0.5 - Math.random());
     let shuffledNameAndTimeArray = addTimeSlotsToShuffledArray(generateMilitaryTimeSlots(shuffledNameArray.length - 1, parseInt(timeStr.replace(":", "")), parseInt(timeIncrementStr)), shuffledNameArray);
-    
     setShuffledNameArray(shuffledNameAndTimeArray);
   };
 
@@ -95,7 +94,6 @@ function Randomizer() {
       fullTimeStr = timeUnitIntToStrWithPadding(hourInt) + timeUnitIntToStrWithPadding(minuteInt);
       timeSlotArray.push(fullTimeStr);
     }
-    
     return timeSlotArray;
   }
 
@@ -108,8 +106,8 @@ function Randomizer() {
     let randomTimeSlotAndNameArray = [];
 
     for (let i = 0; i < shuffledNameArray.length; i++) {
-      const arrayFormat = [timeSlotsArray[i], " - ", shuffledNameArray[i]];
-      randomTimeSlotAndNameArray.push(arrayFormat.join(""));
+      let idTimeNameObject = {id: i, time: timeSlotsArray[i], name: shuffledNameArray[i]};
+      randomTimeSlotAndNameArray.push(idTimeNameObject);
     }
     
     return randomTimeSlotAndNameArray;
@@ -140,13 +138,13 @@ function Randomizer() {
               handleInputText={handleTimeIncrementChange}
               />
           <div className="randomizer-buttons">
-              <Button onClickAction={handleSaveData}
+              <Button onClickAction={handleRandomizerSaveData}
               title={"Save"}/>
-              <Button onClickAction={handleLoadData}
+              <Button onClickAction={handleRandomizerLoadData}
               title={"Load"}/>
               <Button onClickAction={handleShuffleNameArray} 
               title={"Shuffle"}/>
-              <Button onClickAction={deleteLocalStorage} 
+              <Button onClickAction={deleteRandomizerLocalStorage} 
               title={"Delete Save"}/>
           </div>
         </RandomizerForm>
