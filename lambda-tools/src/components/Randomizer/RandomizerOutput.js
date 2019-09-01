@@ -6,8 +6,8 @@ function RandomizerOutput(props) {
 	return (
 		<UnorderedList>
 
-			{typeof(props.shuffledNameArray) === "object" ? props.shuffledNameArray.map((name) =>
-			<ListItem key={name}>{name}</ListItem>
+			{typeof(props.shuffledNameArray) === "object" ? props.shuffledNameArray.map((object) =>
+			<ListItem key={object.id}>{object.time} - {object.name} </ListItem>
 			) : null}
 
 		</UnorderedList>
