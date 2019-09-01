@@ -39,6 +39,16 @@ function Randomizer() {
     timeIncrement !== null ? setTimeIncrementStr(JSON.parse(timeIncrement)) : console.log("No timeIncrement found in localStorage"); // handle error here
   };
 
+  const deleteLocalStorage = event => {
+    event.preventDefault();
+    localStorage.removeItem("nameArray");
+    localStorage.removeItem("time");
+    localStorage.removeItem("timeIncrement");
+    setNameArray("");
+    setTimeStr("");
+    setTimeIncrementStr("")
+  }
+
   // Clicking the button associated, uses the nameArray
   const handleShuffleNameArray = event => {
     event.preventDefault();
@@ -136,6 +146,8 @@ function Randomizer() {
               title={"Load"}/>
               <Button onClickAction={handleShuffleNameArray} 
               title={"Shuffle"}/>
+              <Button onClickAction={deleteLocalStorage} 
+              title={"Delete Save"}/>
           </div>
         </RandomizerForm>
         <RandomizerOutput shuffledNameArray={shuffledNameArray}/>
