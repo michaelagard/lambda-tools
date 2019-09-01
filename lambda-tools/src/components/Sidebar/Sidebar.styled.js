@@ -5,8 +5,7 @@ const lambdaLightBlue = "#14121f";
 
 export const SideBarWrapper = styled.div`
   display: flex;
-  width: 26rem;
-  min-width: 28rem;
+  min-width: 16.7%;
   background: ${lambdaLightBlue};
   color: white;
   min-height: 100vh;
@@ -19,20 +18,22 @@ export const SideBarWrapper = styled.div`
 
 export const SideBarH1 = styled.h1`
   font-size: 3rem;
+  font-weight: bold;
   padding: 2.65rem 1.5rem;
 `;
 
 export const SideBarH3 = styled.h3`
-  font-size: 2rem;
-  padding: .65rem 1.5rem;
+  font-size: 2.4rem;
+  font-weight: 500;
+  padding: 2.5rem 2.5rem;
   padding-top: 1.6rem;
 `;
 
 export const SideBarLink = styled(NavLink)`
   color: #f0f4f7;
   text-decoration: none;
-  font-size: 1.8rem;
-  padding: .95rem 2rem;
+  font-size: 1.6rem;
+  padding: .95rem 3rem;
   
   &.active {
     background: #2f2c4b;
