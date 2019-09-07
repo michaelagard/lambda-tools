@@ -10,3 +10,7 @@ export const UnorderedList = styled.ul`
 export const ListItem = styled.li`
   font-size: 1.6rem;
 `;
+
+export const TimeItem = styled.time`
+  font-size: 1.6rem;
+`;
