@@ -8,43 +8,39 @@ import Button from '../Subcomponents/Button/Button';
 
 function Randomizer() {
   const titleData = {title: "Randomizer", titleDescription: "The Lambda Randomizer is designed to make the team lead's job easier. Paste your list of students in the text area below and click the `Shuffle` button to recieve a randomly sorted list of your students with their automatically assigned time slots. This tool currently only supports military time output."}  
-  const [nameArray, setNameArray] = useState("")
+  const [nameStr, setNameStr] = useState("")
   const [timeStr, setTimeStr] = useState("");
   const [timeIncrementStr, setTimeIncrementStr] = useState("");
   const [shuffledNameArray, setShuffledNameArray] = useState("")
 
-  const handleNameChange = (event) => { setNameArray(event.target.value); }
+  const handleNameChange = (event) => { setNameStr(event.target.value); }
   const handleTimeChange = (event) => { setTimeStr(event.target.value); }
   const handleTimeIncrementChange = (event) => { setTimeIncrementStr(event.target.value); }
 
-  // saves nameArray & timeStr & timeIncrementStr to localstorage
+  // saves nameStr & timeStr & timeIncrementStr to localstorage
   const handleRandomizerSaveData = event => {
     event.preventDefault();
-    const nameArrayFormatted = nameArray.split("\n").filter(function(name) { return name.trim() !== ''; })
-
-    nameArray !== "" ? localStorage.setItem("nameArray", JSON.stringify(nameArrayFormatted)) : console.log("No nameArray found in state."); // handle error here
-    timeStr !== "" ? localStorage.setItem("time", JSON.stringify(timeStr)) : console.log("No timeStr found in state.") // handle error here
+    // CONSOLE LOG FOR TESTING TIME GENERATION
+    nameStr !== "" ? localStorage.setItem("names", JSON.stringify(nameStr)) : console.log("No nameArray found in state."); // handle error here
+    timeStr !== "" ? localStorage.setItem("times", JSON.stringify(timeStr)) : console.log("No timeStr found in state.") // handle error here
     timeIncrementStr !== "" ? localStorage.setItem("timeIncrement", JSON.stringify(timeIncrementStr)) : console.log("No timeIncrementStr found in state."); // handle error here
   }
 
   // loads nameArray & timeStr & timeIncrementStr to localstorage
   const handleRandomizerLoadData = event => {
     event.preventDefault();
-    const nameArray = localStorage.getItem("nameArray");
-    const time = localStorage.getItem("time");
-    const timeIncrement = localStorage.getItem("timeIncrement");
-
-    nameArray !== null ? setNameArray(JSON.parse(nameArray).join("\n")) : console.log("No nameArray found in localStorage"); // handle error here
+    const [ name, time, timeIncrement ] = [ localStorage.getItem("names"), localStorage.getItem("times"), localStorage.getItem("timeIncrement") ]
+    name !== null ? setNameStr(JSON.parse(name)) : console.log("No nameArray found in localStorage"); // handle error here
     time !== null ? setTimeStr(JSON.parse(time)) : console.log("No time found in localStorage"); // handle error here
     timeIncrement !== null ? setTimeIncrementStr(JSON.parse(timeIncrement)) : console.log("No timeIncrement found in localStorage"); // handle error here
   };
 
-  const deleteRandomizerLocalStorage = event => {
+  const handleDeleteSaveData = event => {
     event.preventDefault();
     localStorage.removeItem("nameArray");
     localStorage.removeItem("time");
     localStorage.removeItem("timeIncrement");
-    setNameArray("");
+    setNameStr("");
     setTimeStr("");
     setTimeIncrementStr("")
   }
@@ -52,55 +48,62 @@ function Randomizer() {
   // Clicking the button associated, uses the nameArray
   const handleShuffleNameArray = event => {
     event.preventDefault();
-
-    let shuffledNameArray = nameArray.split("\n").sort(() => 0.5 - Math.random());
-    let shuffledNameAndTimeArray = addTimeSlotsToShuffledArray(generateMilitaryTimeSlots(shuffledNameArray.length - 1, parseInt(timeStr.replace(":", "")), parseInt(timeIncrementStr)), shuffledNameArray);
-    setShuffledNameArray(shuffledNameAndTimeArray);
+    const timeSlotsArray = generateTimeSlotArray(nameStr.split("\n").length - 1, timeStr, timeIncrementStr);
+    const shuffledNameArray = nameStr.split("\n").sort(() => 0.5 - Math.random());
+    setShuffledNameArray(addTimeSlotsToShuffledArray(timeSlotsArray, shuffledNameArray));
   };
 
-  const parseTimeFromString = (timeStr) => {
-    const [minute, hour] = [parseInt(timeStr.substr(3,2).padStart(2, '0')), parseInt(timeStr.substr(0,2).padStart(2, '0'))];
-    return [minute, hour];
-  }
-
   // Generates time slots from timeStr/timeIncrementStr state 
-  const generateMilitaryTimeSlots = (shuffledNameArrayLength, fullTimeInt, timeIncrementInt) => {
+  const generateTimeSlotArray = (nameArrayLength, timeStr, timeIncrementStr) => {
+    // Instantiate first part of timeSlotArray
+    const timeSlotArray = [{id: 0, hour: timeStr.slice(0, 2), minute: timeStr.slice(3)}]
+    const minuteIncrementInt = Number(timeIncrementStr);
 
-    const timeUnitIntToStrWithPadding = (timeUnitInt) => {
-      return timeUnitInt.toString().padStart(2, '0');
-    }
-    
-    let timeSlotArray = [];
-    let fullTimeStr = fullTimeInt.toString().padStart(4, '0');
-    // Used to check conditionals below
-    let [minuteInt, hourInt] = parseTimeFromString(fullTimeStr);
-    
-    timeSlotArray.push(fullTimeStr.replace(":", ""));
-    for (let i = 0; i < shuffledNameArrayLength; i++) {
+    let fullTimeInt = Number(timeSlotArray[0].hour + timeSlotArray[0].minute);
+    let minuteInt = Number(timeSlotArray[0].minute);
+    let hourInt = Number(timeSlotArray[0].hour);
+
+    // iterate through the length of the nameArrayLength and add incremental time to timeSlotArray
+    for (let i = 0; i < nameArrayLength; i++) {
       // Checks if the time is > than 2360 after incrementing
-      if ((fullTimeInt + timeIncrementInt) >= 2360) {
-        hourInt = 0;
-        minuteInt = (minuteInt + timeIncrementInt) % 60;
-        // Checks if the minute is >= 60
-      } else if (minuteInt + timeIncrementInt >= 60) {
-        minuteInt = (minuteInt + timeIncrementInt) % 60;
-        hourInt += 1;
-        // Checks if the minute is <= 60
-      } else if (minuteInt + timeIncrementInt < 60) {
-        minuteInt += timeIncrementInt;
-      }
+      // console.log((hourInt + Math.floor((minuteIncrementInt / 60))));
+      
+      if ((hourInt + Math.floor((minuteIncrementInt / 60))) >= 24) {
+        console.log("if ((hourInt + Math.floor((minuteIncrementInt / 60))) >= 24)")
+        minuteInt = minuteInt + minuteIncrementInt % 60
+        hourInt = Math.floor((minuteInt + minuteIncrementInt) / 60) - 1
 
-      fullTimeInt = parseInt(timeUnitIntToStrWithPadding(hourInt) + timeUnitIntToStrWithPadding(minuteInt));
-      fullTimeStr = timeUnitIntToStrWithPadding(hourInt) + timeUnitIntToStrWithPadding(minuteInt);
-      timeSlotArray.push(fullTimeStr);
+        console.log(`hourInt: ${hourInt}`)
+        console.log(`minuteInt: ${minuteInt}`)
+        // console.log((hourInt + Math.floor(minuteIncrementInt / 60)) - 24);
+        // hourInt = (hourInt + Math.floor(minuteIncrementInt / 60)) - 24;
+        // minuteInt = (minuteInt + minuteIncrementInt) % 60;
+        // console.log(minuteInt)
+        // console.log("1")
+      } else if (minuteInt + minuteIncrementInt >= 60) {
+        console.log("if (minuteInt + minuteIncrementInt >= 60)")
+        minuteInt = (minuteInt + minuteIncrementInt) % 60;
+        // hourInt = Math.floor((minuteInt + minuteIncrementInt) / 60)
+        hourInt += Math.floor((minuteInt + minuteIncrementInt) / 60)
+
+        console.log(`hourInt: ${hourInt}`)
+        console.log(`minuteInt: ${minuteInt}`)
+        
+        // Checks if the minute is <= 60
+      } else if (minuteInt + minuteIncrementInt < 60) {
+        console.log("3")
+        minuteInt += minuteIncrementInt;
+      }
+      let minuteStr = minuteInt.toString().padStart(2, '0');
+      let hourStr = hourInt.toString().padStart(2, '0');
+      timeSlotArray.push({id: i, hour: hourStr, minute: minuteStr});
+      
     }
     return timeSlotArray;
   }
 
   // Takes in the generated time slot array and shuffled name array and outputs
-  // the shuffled name array with time slots hyphonated to each name.
-  // EG: input: [ "2105", "2125"] | Array(7) [ "Foo Bar", "Roo Far" ]
-  // output: [ "2105 - Foo Bar", "2125 - Roo Far" ]
+  // the shuffled name array with time slots in an object.
 
   const addTimeSlotsToShuffledArray = (timeSlotsArray, shuffledNameArray) => {
     let randomTimeSlotAndNameArray = [];
@@ -119,7 +122,7 @@ function Randomizer() {
         <RandomizerForm>
             <TextAreaForm formName="List of Names"
               formClassName="randomizer-names-form"
-              inputText={nameArray}
+              inputText={nameStr}
               handleInputText={handleNameChange}
               placeHolderText={"Seperate names by a newline"}/>
 
@@ -144,7 +147,7 @@ function Randomizer() {
               title={"Load"}/>
               <Button onClickAction={handleShuffleNameArray} 
               title={"Shuffle"}/>
-              <Button onClickAction={deleteRandomizerLocalStorage} 
+              <Button onClickAction={handleDeleteSaveData} 
               title={"Delete Save"}/>
           </div>
         </RandomizerForm>
