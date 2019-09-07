@@ -1,5 +1,5 @@
 import React from 'react';
-import { UnorderedList, ListItem } from './RandomizerOutput.styled';
+import { UnorderedList, ListItem, TimeItem } from './RandomizerOutput.styled';
 
 function RandomizerOutput(props) {
 
@@ -7,7 +7,7 @@ function RandomizerOutput(props) {
 		<UnorderedList>
 
 			{typeof(props.shuffledNameArray) === "object" ? props.shuffledNameArray.map((object) =>
-			<ListItem key={object.id}><time>{object.time}</time> - {object.name} </ListItem>
+			<ListItem key={object.id}><TimeItem>{object.time.hour}:{object.time.minute}</TimeItem> - {object.name} </ListItem>
 			) : null}
 
 		</UnorderedList>
