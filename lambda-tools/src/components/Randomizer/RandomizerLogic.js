@@ -13,13 +13,13 @@ export const generateTimeSlotArray = (nameArrayLength, timeStr, timeIncrementStr
     // Checks if the time is > than 2360 after incrementing
     
     if ((hourInt + Math.floor((minuteIncrementInt / 60))) >= 24) {
-      minuteInt = minuteInt + minuteIncrementInt % 60
       hourInt = Math.floor((minuteInt + minuteIncrementInt) / 60) - 1
+      minuteInt = minuteInt + minuteIncrementInt % 60
 
       // Checks if minuteInt + minuteIncrementInt exceeds 59
     } else if (minuteInt + minuteIncrementInt >= 60) {
-      minuteInt = (minuteInt + minuteIncrementInt) % 60;
       hourInt += Math.floor((minuteInt + minuteIncrementInt) / 60)
+      minuteInt = (minuteInt + minuteIncrementInt) % 60;
 
       // Checks if the minute is <= 60
     } else if (minuteInt + minuteIncrementInt < 60) {
