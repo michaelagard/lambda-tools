@@ -6,7 +6,12 @@ function InputForm(props) {
 	return (
     <FormWrapper>
       <FormTitle>{props.formName}</FormTitle>
-      <FormInput type={props.type} maxLength={props.maxLength} value={props.inputText} placeholder={props.placeHolderText} onChange={props.handleInputText.bind(props)} /> 
+      <FormInput type={props.type}
+      name={props.name}
+      maxLength={props.maxLength}
+      value={props.value}
+      placeholder={props.placeholder}
+      onChange={props.onChange.bind(props)} /> 
     </FormWrapper>
 	)
 }
