@@ -9,7 +9,7 @@ export const FormWrapper = styled.div`
 export const FormInput = styled.input`
   display: flex;
   border: 1px solid grey;
-  border-radius: 5%;
+  border-radius: 2px;
   cursor: text;
   &:hover {
     background: #EEE;

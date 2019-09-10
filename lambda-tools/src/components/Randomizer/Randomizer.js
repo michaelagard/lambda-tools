@@ -57,23 +57,23 @@ function Randomizer() {
         <RandomizerForm>
             <TextAreaForm formName="List of Names"
               formClassName="randomizer-names-form"
-              inputText={nameStr}
-              handleInputText={handleNameChange}
+              value={nameStr}
+              onChange={handleNameChange}
               placeHolderText={"Seperate names by a newline"}/>
 
             <InputForm formName="Starting Time"
               type="time"
               formClassName="randomizer-time-form"
-              inputText={timeStr}
-              handleInputText={handleTimeChange}
+              value={timeStr}
+              onChange={handleTimeChange}
               placeHolderText={"HH:MM"}
               maxLength="8"
               />
             <InputForm formName="Minute Increment"
               type="number"
               formClassName="randomizer-time-form"
-              inputText={timeIncrementStr}
-              handleInputText={handleTimeIncrementChange}
+              value={timeIncrementStr}
+              onChange={handleTimeIncrementChange}
               />
           <div className="randomizer-buttons">
               <Button onClickAction={handleRandomizerSaveData}

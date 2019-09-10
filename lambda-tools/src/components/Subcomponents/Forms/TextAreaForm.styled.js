@@ -12,7 +12,7 @@ export const TextArea = styled.textarea`
   width: ${props => props.width ? props.width : ""};
   resize: ${props => props.resize ? "none" : ""}
   border: 1px solid grey;
-  border-radius: 2%;
+  border-radius: 2px;
   &:hover {
     background: #EEE;
     transition: .5s;
