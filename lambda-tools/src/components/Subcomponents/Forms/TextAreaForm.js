@@ -6,12 +6,13 @@ function TextAreaForm(props) {
     <FormWrapper>
       <FormTitle>{props.formName}</FormTitle>
       <TextArea 
+        name={props.name}
         resize={props.resize}
         width={props.width}
         maxLength={props.maxLength}
-        value={props.inputText}
-        placeholder={props.placeHolderText}
-        onChange={props.handleInputText.bind(props)} /> 
+        value={props.value}
+        placeholder={props.placeholder}
+        onChange={props.onChange} /> 
     </FormWrapper>
 	)
 }
