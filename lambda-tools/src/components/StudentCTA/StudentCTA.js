@@ -21,8 +21,6 @@ function StudentCTA() {
   //   setStandUpStr(modifiedStr);
   // }
 
-
-
   // const replaceStrVariable = (str, formStr) => {
   //   let replaceIndex = formStr.search(str) + str.length;
   //   moduleReviewAnnouncementStr.InsertAt(str, replaceIndex)
@@ -38,7 +36,7 @@ function StudentCTA() {
           name="startTime"
           type="time"
           formClassName="cta-starting-time-input"
-          value={inputs.startTimeStr}
+          value={inputs.startTime}
           onChange={handleInputChange}
           placeholder={"HH:MM"}
           maxLength="8"/>
@@ -47,7 +45,7 @@ function StudentCTA() {
           name="zoomLink"
           type="text"
           formClassName="cta-zoom-link-input"
-          value={inputs.zoomLinkStr}
+          value={inputs.zoomLink}
           onChange={handleInputChange}
           placeholder={"Paste Zoom Link Here"}
           maxLength="256"/>
@@ -56,7 +54,7 @@ function StudentCTA() {
           name="TKTopic"
           type="text"
           formClassName="cta-tk-topic-input"
-          value={inputs.TKTopicStr}
+          value={inputs.TKTopic}
           onChange={handleInputChange}
           placeholder={"Paste TK Topic Here"}
           maxLength="256"/>
@@ -64,7 +62,7 @@ function StudentCTA() {
         <TextAreaForm formName="Stand Up"
           name="standUpInput"
           formClassName="stand-up-input"
-          value={inputs.standUpStr}
+          value={inputs.standUp}
           onChange={handleInputChange}
           width={"45%"}
           resize={"none"}/>
@@ -72,7 +70,7 @@ function StudentCTA() {
         <TextAreaForm formName="Module Review Announcement"
           name="moduleReviewAnnouncement"
           formClassName="module-review-accouncement-input"
-          value={inputs.moduleReviewAnnouncementStr}
+          value={inputs.moduleReviewAnnouncement}
           onChange={handleInputChange}
           width={"45%"}
           resize={"none"}/>
@@ -80,7 +78,7 @@ function StudentCTA() {
         <TextAreaForm formName="Module Review"
           name="moduleReview"
           formClassName="module-review-input"
-          value={inputs.moduleReviewStr}
+          value={inputs.moduleReview}
           onChange={handleInputChange}
           width={"45%"}
           resize={"none"}/>
@@ -88,7 +86,7 @@ function StudentCTA() {
         <TextAreaForm formName="TK Review"
           name="TKReview"
           formClassName="tk-review-input"
-          inputText={inputs.tkPrepStr}
+          value={inputs.TKReview}
           onChange={handleInputChange}
           width={"45%"}
           resize={"none"}/>
