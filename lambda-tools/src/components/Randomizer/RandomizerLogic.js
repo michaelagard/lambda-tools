@@ -9,6 +9,10 @@ export const generateTimeSlotArray = (nameArrayLength, timeStr, timeIncrementStr
   let minuteInt = Number(timeSlotArray[0].minute);
   let hourInt = Number(timeSlotArray[0].hour);
 
+  let regularTimeString = convertMilitaryTimeToRegularTime(hourInt, minuteInt);
+
+  timeSlotArray[0].regularTimeString = regularTimeString;
+
   // iterate through the length of the nameArrayLength and add incremental time to timeSlotArray
   for (let i = 0; i < nameArrayLength; i++) {
 
@@ -31,7 +35,10 @@ export const generateTimeSlotArray = (nameArrayLength, timeStr, timeIncrementStr
     let minuteStr = minuteInt.toString().padStart(2, '0');
     let hourStr = hourInt.toString().padStart(2, '0');
 
-    timeSlotArray.push({id: i, hour: hourStr, minute: minuteStr});
+    // convert minuteInt and hourInt to a string (regular time, not military) to be stored into the time slot array.
+    regularTimeString = convertMilitaryTimeToRegularTime(hourInt, minuteInt);
+
+    timeSlotArray.push({id: i + 1, hour: hourStr, minute: minuteStr, regularTimeString});
     
   }
   return timeSlotArray;
@@ -46,6 +53,16 @@ export const addTimeSlotsToShuffledArray = (timeSlotsArray, shuffledNameArray) =
     let idTimeNameObject = {id: i, time: timeSlotsArray[i], name: shuffledNameArray[i]};
     randomTimeSlotAndNameArray.push(idTimeNameObject);
   }
-  
+
   return randomTimeSlotAndNameArray;
+}
+
+const convertMilitaryTimeToRegularTime = (hourInt, minuteInt) => {
+  if (hourInt >= 13) { return `${hourInt - 12}:${minuteInt.toString().padStart(2, '0')} PM`; }
+
+  if (hourInt === 12) { return `${hourInt}:${minuteInt.toString().padStart(2, '0')} PM`; }
+
+  if (hourInt === 0) { return `12:${minuteInt.toString().padStart(2, '0')} AM`; }
+
+  return `${hourInt.toString().replace('0', '')}:${minuteInt.toString().padStart(2, '0')} AM`;
 }
